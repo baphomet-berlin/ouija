@@ -1,0 +1,7 @@
+.LetterBox {
+  background-color: #D3D3D3;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  margin: 5px;
+}
