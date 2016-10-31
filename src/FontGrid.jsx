@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FontPoint from './FontPoint'
+import FontLine from './FontLine';
 import './FontGrid.css';
 
 const padding = 5;
@@ -25,14 +26,19 @@ const paddedSize = () => ({
 
 class FontGrid extends Component {
   render() {
+    const { lines } = this.props;
     return (
       <svg className="FontGrid" {...paddedSize()} >
         {
           matrix.reduce((a, b) => a.concat(b))
-          .map((coords, key) => 
-            <FontPoint coords={coords} key={key} />
+          .map((it, key) => 
+            <FontPoint coords={it} key={key} />
           )
-
+        }
+        {
+          lines.map((it, key) =>
+            <FontLine key={key} coords={[paddedRange(...it[0]), paddedRange(...it[1])]} />
+          )
         }
       </svg>
     );

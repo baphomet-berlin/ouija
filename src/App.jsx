@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Ouija</h1>
-        <FontGrid />
+        <FontGrid lines={[[[0, 0], [0, 1]]]} />
       </div>
     );
   }
