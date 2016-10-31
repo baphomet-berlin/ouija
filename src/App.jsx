@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Ouija</h1>
-        <LetterBox />
+        <LetterBox letter="a" />
       </div>
     );
   }
