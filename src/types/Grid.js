@@ -1,11 +1,11 @@
 //@flow
 
 class Grid {
-  width: number;
-  height:number;
-  initialize(width:number, height:number) {
-    this.width = width;
-    this.height = height;
-  }
+  rows:   [number];
+  cols:   [number];
 
+  initialize(w:number, h:number) {
+    this.rows = Array.from(new Array(w), (it, i) => i + 1);
+    this.cols = Array.from(new Array(h), (it, i) => i + 1);
+  }
 }
