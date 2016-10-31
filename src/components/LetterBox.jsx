@@ -1,12 +1,11 @@
 import React from 'react';
-import FontGrid from '../../FontGrid';
-import './index.css';
+import FontGrid from './FontGrid';
+import './LetterBox.css';
 
 export default function LetterBox ({letter}) {
   return (
     <div className="LetterBox">
       <FontGrid lines={[[[0, 0], [0, 1]]]} />
-
       {letter}
     </div>
   )
