@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import './FontGrid.css';
 
-class FontGrid extends Component {
-  static padding = 5;
-  static unit = 10;
-  render() {
+const padding = 5;
+const unit = 10;
+const units = {
+  x: 2,
+  y: 8,
+};
 
+const paddedDimension = (dimension) =>
+  (units[dimension] * unit) + (padding * 2);
+
+const paddedSize = () => ({
+  width: paddedDimension('x'),
+  height: paddedDimension('y'),
+});
+
+class FontGrid extends Component {
+  render() {
     return (
-      <svg className="FontGrid" width={20} height={90}>
+      <svg className="FontGrid" {...paddedSize()} >
       </svg>
     );
   }
