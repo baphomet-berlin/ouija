@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import FontGrid from './FontGrid';
+
+import Alphabet from './components/Alphabet';
 import './App.css';
 
 class App extends Component {
@@ -7,7 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Ouija</h1>
-        <FontGrid lines={[[[0, 0], [0, 1]]]} />
+        <Alphabet />
       </div>
     );
   }
