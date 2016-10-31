@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class FontPoints extends Component {
+class FontPoint extends Component {
   render() {
     const { coords } = this.props;
     const [ x, y ] = coords;
@@ -10,4 +10,11 @@ class FontPoints extends Component {
   }
 }
 
-export default FontPoints;
+
+FontPoint.propTypes = {
+  coords: React.PropTypes.arrayOf(
+    React.PropTypes.number
+  ),
+}
+
+export default FontPoint;

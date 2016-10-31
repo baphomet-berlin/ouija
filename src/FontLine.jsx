@@ -10,4 +10,13 @@ class FontLine extends Component {
   }
 }
 
+FontLine.propTypes = {
+  coords: React.PropTypes.arrayOf(
+    React.PropTypes.arrayOf(
+      React.PropTypes.number
+    )                          
+  ),
+}
+
 export default FontLine;
+export { FontLine };
