@@ -1,8 +1,7 @@
 import React from 'react';
+import LetterBox from './LetterBox';
 
-import LetterBox from '../LetterBox';
-
-export default function Alphabet ({letters}) {
+export default function Board ({letters}) {
   return (
     <div className="Alphabet">
       {letters.split('').map(letter => (
@@ -12,8 +11,6 @@ export default function Alphabet ({letters}) {
   )
 }
 
-Alphabet.defaultProps = {
+Board.defaultProps = {
   letters: 'abcdefghijklmnopqrstuvwxyz'
 }
-
-
