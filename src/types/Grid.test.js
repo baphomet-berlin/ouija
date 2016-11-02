@@ -2,6 +2,7 @@ import Grid from './Grid';
 import { List, Range } from 'immutable';
 
 describe('#constructor', () =>{
+  const oneByOne = new Grid(1, 1);
   const a = new Grid(3, 8);
   const b = new Grid(4, 4);
   it('sets rows and columns', () => {
@@ -12,11 +13,13 @@ describe('#constructor', () =>{
   });
   it('sets nodes', () => {
     expect(a.nodes.size).toBe(24);
-    expect(a.nodes.first).toBe(List(1,1));
+    expect(a.nodes.first()).toEqual(List.of(1, 1));
+    expect(a.nodes.last()).toEqual(List.of(3, 8));
   });
 
   it('sets vertices', () => {
-    // expect(a.vertices.size).toBe(51);
-    // expect(b.vertices.size).toBe(42);
+    expect(oneByOne.vertices.size).toBe(6)
+    expect(a.vertices.size).toBe(59);
+    expect(b.vertices.size).toBe(37);
   });
 });
