@@ -14,6 +14,11 @@ export default function FontGrid ({letter, grid}) {
     {grid.nodes.map(it =>
       <FontPoint key={it.toString()} coords={paddedCoords(it)} />
     )}
+    {grid.vertices.map(([p1, p2, active]) =>
+      <FontLine
+        key={p1.toString() + p2.toString()} 
+        coords={[paddedCoords(p1), paddedCoords(p2)]} />
+    )}
   </svg>)
 }
 
