@@ -12,7 +12,9 @@ const paddedCoords = (point) =>
 export default function FontGrid ({letter, grid}) {
   return (<svg className="FontGrid">
     {grid.nodes.map(it =>
-      <FontPoint key={it.toString()} coords={paddedCoords(it)} />
+      <FontPoint
+        key={it.toString()}
+        coords={paddedCoords(it)} />
     )}
     {grid.vertices.map(([p1, p2, active]) =>
       <FontLine
