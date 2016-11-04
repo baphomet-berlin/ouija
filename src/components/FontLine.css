@@ -1,0 +1,6 @@
+.FontLine {
+  stroke: gray;
+  &.active {
+    stroke: red;
+  }
+}
