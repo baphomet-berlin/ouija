@@ -1,11 +1,14 @@
+//@flow
+
 import React from 'react';
 import FontGrid from './FontGrid';
 import './LetterBox.css';
+import Grid from '../types/Grid';
 
-export default function LetterBox ({letter}) {
+export default function LetterBox ({letter, grid}) {
   return (
     <div className="LetterBox">
-      <FontGrid lines={[[[0, 0], [0, 1]]]} />
+      <FontGrid grid={grid}/>
       {letter}
     </div>
   )
@@ -19,5 +22,6 @@ LetterBox.propTypes = {
         ' `' + componentName + '`. Validation failed.'
       )
     }
-  }
+  },
+  grid: React.PropTypes.instanceOf(Grid),
 }

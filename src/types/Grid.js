@@ -1,5 +1,5 @@
 //@flow
-import { Range, Seq, List, Map, Set, OrderedSet } from 'immutable';
+import { Range, List } from 'immutable';
 import R from 'ramda';
 type Node = List<number>;
 type Vertex = [Node, Node, boolean];
