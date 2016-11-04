@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import './FontLine.css';
 
 class FontLine extends Component {
   render() {
     const { coords, active } = this.props;
     const [[ x1, y1 ], [ x2, y2 ]] = coords;
     return (
-      <line {...{x1, y1, x2, y2}} strokeWidth="1" className={active ? 'active' : ''} />
+      <line {...{x1, y1, x2, y2}}
+        strokeWidth="1" 
+        className={`FontLine ${active ? 'active' : ''}`}
+      />
     );
   }
 }
