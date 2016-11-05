@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import './FontPoint.css';
 
 class FontPoint extends Component {
   render() {
     const { coords } = this.props;
     const [ x, y ] = coords;
     return (
-      <circle cx={x} cy={y} r={2} fill="red"/>
+      <circle cx={x} cy={y} r={2} className="FontPoint" />
     );
   }
 }
