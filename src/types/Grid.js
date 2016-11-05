@@ -1,20 +1,22 @@
 //@flow
-import { Range, List, OrderedSet, Map } from 'immutable';
+import { Range, List, Set, Map } from 'immutable';
 import R from 'ramda';
 type Node = List<number>;
-type Vertex = [OrderedSet<Node>, boolean];
+type Vertex = Set<Node>;
 
 class Grid {
   xPoints: number;
   yPoints: number;
-  vertices: Map<Vertex, boolean>;
+  gridVertices: Set<Vertex>;
+  activeVertices: Set<Vertex>;
   nodes: Array<Node>;
 
   constructor(w:number, h:number) {
     this.xPoints = w + 1;
     this.yPoints = h + 1;
     this.nodes = this.nodeArray(this.xPoints, this.yPoints);
-    this.vertices = this.vertexArray(this.nodes);
+    this.gridVertices = this.vertexArray(this.nodes);
+    this.activeVertices = Set();
   }
 
   nodeArray(xPoints:number, yPoints:number):Array<Node> {
@@ -26,12 +28,11 @@ class Grid {
 
   vertexArray(nodes:Array<Node>) {
     const successors = [[1, -1], [0, 1], [1, 0], [1, 1]];
-
-    return Map(R.unnest(this.nodes.map(node =>
+    return Set(R.unnest(this.nodes.map(node =>
       successors
         .map(([x, y]) => [x + node.first(), y + node.last()])
         .filter(it => this.isValidNode(it))
-        .map(([x, y]) => [OrderedSet.of(node, List.of(x, y)), false])
+        .map(([x, y]) => Set.of(node, List.of(x, y)))
     )))
   }
 

@@ -13,17 +13,19 @@ class FontGrid extends React.Component{
 
   state = {
     nodes: this.props.grid.nodes,
-    vertices: this.props.grid.vertices,
+    activeVertices: this.props.grid.activeVertices,
+    gridVertices: this.props.grid.gridVertices,
   }
 
-  toggleVertex(points) {
-    const vertices = this.state.vertices.update(points, it => !it)
-    console.log(vertices)
-    this.setState({vertices})
+  toggleVertex(vertex) {
+    const activeVertices = this.state.activeVertices.has(vertex) ?
+      this.state.activeVertices.delete(vertex) :
+      this.state.activeVertices.add(vertex);
+    this.setState({activeVertices});
   }
 
   render() {
-    const { nodes, vertices } = this.state;
+    const { nodes, activeVertices, gridVertices } = this.state;
     return (
       <svg className="FontGrid">
         {nodes.map(it =>
@@ -31,18 +33,18 @@ class FontGrid extends React.Component{
             key={it.toString()}
             coords={paddedCoords(it)} />
         )}
-        {vertices.entrySeq().toArray().map(([points]) =>
+        {gridVertices.toArray().map(vertex =>
           <FontLine
-            key={points.toString()}
-            coords={[paddedCoords(points.first()), paddedCoords(points.last())]}
-            onClick={() => this.toggleVertex(points)}
+            key={vertex.toString()}
+            coords={[paddedCoords(vertex.first()), paddedCoords(vertex.last())]}
+            onClick={() => this.toggleVertex(vertex)}
           />
         )}
-        {vertices.entrySeq().toArray().map(([points, active]) =>
+        {activeVertices.toArray().map(vertex =>
           <FontLine
-            key={points.toString()}
-            coords={[paddedCoords(points.first()), paddedCoords(points.last())]}
-            active={active}
+            key={vertex.toString()}
+            coords={[paddedCoords(vertex.first()), paddedCoords(vertex.last())]}
+            active
           />
         )}
       </svg>
