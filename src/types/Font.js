@@ -17,6 +17,14 @@ class Font {
   constructor(glyphs:GlyphMap) {
     this.glyphs = glyphs;
   }
+
+  set(letter:string, grid:string) {
+    this.glyphs.set(letter, grid);
+  }
+
+  get(letter:string) {
+    this.glyphs.get(letter);
+  }
 }
 
 export default Font;

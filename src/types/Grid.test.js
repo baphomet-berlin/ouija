@@ -4,10 +4,12 @@ import { List, Range } from 'immutable';
 describe('#constructor', () =>{
   const oneByOne = new Grid(1, 1);
   const twoByTwo = new Grid(2, 2);
-  const gridFont = new Grid(2, 6);
-  it('sets x and y points', () => {
+  const gridFont = new Grid();
+  it('sets x and y points from w and h', () => {
     expect(oneByOne.xPoints).toEqual(2);
     expect(oneByOne.yPoints).toEqual(2);
+  });
+  it('sets default x and y points', () => {
     expect(gridFont.xPoints).toEqual(3);
     expect(gridFont.yPoints).toEqual(7);
   });
