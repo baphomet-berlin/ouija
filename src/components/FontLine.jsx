@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import classNames from 'classnames';
 import './FontLine.css';
 
 class FontLine extends Component {
@@ -9,7 +9,7 @@ class FontLine extends Component {
     return (
       <line {...{x1, y1, x2, y2}}
         fill="transparent"
-        className={`FontLine ${active ? 'active' : ''}`}
+        className={classNames('FontLine', { active, eventToggler: onClick })}
         onClick={onClick}
       />
     );

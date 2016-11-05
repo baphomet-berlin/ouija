@@ -1,13 +1,22 @@
 .FontLine {
-  stroke: gray;
-  stroke-width: 4;
   cursor: pointer;
+  pointer-events: none;
 }
 
 .FontLine:hover {
   stroke: orange;
 }
 
+.FontLine.eventToggler {
+  pointer-events: stroke;
+  stroke-linecap: round;
+  stroke: transparent;
+  stroke-width: 4;
+}
+
+.FontLine.eventToggler:hover {
+  stroke: orange;
+}
 .FontLine.active {
   stroke: red;
 }

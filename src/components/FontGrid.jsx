@@ -18,6 +18,7 @@ class FontGrid extends React.Component{
 
   toggleVertex(points) {
     const vertices = this.state.vertices.update(points, it => !it)
+    console.log(vertices)
     this.setState({vertices})
   }
 
@@ -30,12 +31,18 @@ class FontGrid extends React.Component{
             key={it.toString()}
             coords={paddedCoords(it)} />
         )}
+        {vertices.entrySeq().toArray().map(([points]) =>
+          <FontLine
+            key={points.toString()}
+            coords={[paddedCoords(points.first()), paddedCoords(points.last())]}
+            onClick={() => this.toggleVertex(points)}
+          />
+        )}
         {vertices.entrySeq().toArray().map(([points, active]) =>
           <FontLine
             key={points.toString()}
             coords={[paddedCoords(points.first()), paddedCoords(points.last())]}
             active={active}
-            onClick={() => this.toggleVertex(points)}
           />
         )}
       </svg>
