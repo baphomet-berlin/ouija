@@ -1,6 +1,6 @@
 //@flow
 import Grid from './Grid';
-import { Map } from 'immutable';
+import { Map, List, Set } from 'immutable';
 import R from 'ramda';
 
 
@@ -22,9 +22,9 @@ class Font {
     return new Font(this.glyphs.set(letter, grid));
   }
 
-  toggleVertex(letter:string, vertex:Set<Set<number>>) {
-    const letterGrid = this.glyphs.get(letter);
-    this.set(letter, letterGrid.toggleVertex(vertex));
+  toggleVertex(letter:string, vertex:Set<List<number>>) {
+    const letterGrid = this.glyphs.get(letter).toggleVertex(vertex);
+    return this.set(letter, letterGrid);
   }
 
   get(letter:string) {
