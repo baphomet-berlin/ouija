@@ -11,7 +11,7 @@ class Grid {
   activeVertices: Set<Vertex>;
   nodes: Array<Node>;
 
-  constructor(w:number, h:number) {
+  constructor(w:number=2, h:number=6) {
     this.xPoints = w + 1;
     this.yPoints = h + 1;
     this.nodes = this.nodeArray(this.xPoints, this.yPoints);
