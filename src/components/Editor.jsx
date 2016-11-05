@@ -4,7 +4,7 @@ import React from 'react';
 import LetterBox from './LetterBox';
 import Grid from '../types/Grid';
 
-export default function Board ({letters}) {
+export default function Editor({letters}) {
   return (
     <div className="Alphabet">
       {letters.split('').map(letter => (
@@ -17,6 +17,6 @@ export default function Board ({letters}) {
   )
 }
 
-Board.defaultProps = {
+Editor.defaultProps = {
   letters: 'abcdefghijklmnopqrstuvwxyz'
 }
