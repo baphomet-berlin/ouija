@@ -23,21 +23,23 @@ class FontGrid extends React.Component{
 
   render() {
     const { nodes, vertices } = this.state;
-    return (<svg className="FontGrid">
-      {nodes.map(it =>
-        <FontPoint
-          key={it.toString()}
-          coords={paddedCoords(it)} />
-      )}
-      {vertices.entrySeq().toArray().map(([points, active]) =>
-        <FontLine
-          key={points.toString()}
-          coords={[paddedCoords(points.first()), paddedCoords(points.last())]}
-          active={active}
-          onClick={() => this.toggleVertex(points)}
-        />
-      )}
-    </svg>)
+    return (
+      <svg className="FontGrid">
+        {nodes.map(it =>
+          <FontPoint
+            key={it.toString()}
+            coords={paddedCoords(it)} />
+        )}
+        {vertices.entrySeq().toArray().map(([points, active]) =>
+          <FontLine
+            key={points.toString()}
+            coords={[paddedCoords(points.first()), paddedCoords(points.last())]}
+            active={active}
+            onClick={() => this.toggleVertex(points)}
+          />
+        )}
+      </svg>
+    )
   }
 }
 FontGrid.propTypes = {
