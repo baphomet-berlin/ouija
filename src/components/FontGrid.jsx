@@ -1,6 +1,8 @@
 import React from 'react';
 import FontPoint from './FontPoint'
 import FontLine from './FontLine';
+import { Set } from 'immutable';
+
 import './FontGrid.css';
 
 const padding = 5;
@@ -19,7 +21,7 @@ export default function FontGrid ({letter, grid}) {
     {grid.vertices.toSeq().map((active, [p1, p2]) =>
       <FontLine
         key={p1.toString() + p2.toString()}
-        points={[p1, p2]}
+        points={Set(p1, p2)}
         coords={[paddedCoords(p1), paddedCoords(p2)]}
         active={active}
       />

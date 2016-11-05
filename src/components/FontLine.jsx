@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import './FontLine.css';
 
 class FontLine extends Component {
