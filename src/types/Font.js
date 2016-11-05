@@ -30,6 +30,15 @@ class Font {
   get(letter:string) {
     return this.glyphs.get(letter);
   }
+
+  toJS() {
+    const glyphsObject = this.glyphs.toObject();
+    const letters = Object.keys(glyphsObject);
+    return {
+      letters,
+      grids: letters.map(it => this.get(it).toGridFontJS()),
+    }
+  }
 }
 
 export default Font;

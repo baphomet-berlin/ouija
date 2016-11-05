@@ -23,12 +23,8 @@ class Grid {
     this.activeVertices = activeVertices;
   }
 
-  toJS() {
-    return {
-      w: this.xPoints,
-      h: this.yPoints,
-      activeVertices: this.activeVertices.toJS(),
-    }
+  toGridFontJS() {
+    return this.activeVertices.toJS();
   }
 
   toggleVertex(vertex:Vertex) {
@@ -42,7 +38,7 @@ class Grid {
     return Range(0, xPoints).flatMap(col => 
       Range(0, yPoints).map(row =>
         List.of(col, row)
-    )).toArray();   
+    )).toArray();
   }
 
   vertexArray(nodes:Array<Node>) {

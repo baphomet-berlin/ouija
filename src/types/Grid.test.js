@@ -33,23 +33,15 @@ describe('#toggleVertex', () => {
   });
 });
 
-describe('#toJS', () => {
-  const defaultJS = {
-    w: 3,
-    h: 7,
-    activeVertices: [],
-  }
-  const editedJS = {
-    w: 3,
-    h: 7,
-    activeVertices: [[[0, 1], [0, 0]]],
-  }
+describe('#toGridFontJS', () => {
+  const defaultJS = [];
+  const editedJS = [[[0, 1], [0, 0]]];
   it('serializes an empty grid', () => {
-    expect(gridFont.toJS()).toEqual(defaultJS);
+    expect(gridFont.toGridFontJS()).toEqual(defaultJS);
   });
   it('serializes an edited grid', () => {
     const toggled = gridFont.toggleVertex(Set.of(List.of(0, 1), List.of(0, 0)));
-    expect(toggled.toJS()).toEqual(editedJS);
+    expect(toggled.toGridFontJS()).toEqual(editedJS);
   });
 
 })
