@@ -26,3 +26,10 @@ describe('#constructor', () =>{
     expect(myFont.glyphs.size).toEqual(1);
   });
 });
+
+describe('#set', () => {
+  const myFont = new Font(glyphs);
+  it('sets fonts', () => {
+    expect(myFont.glyphs.size).toEqual(26);
+  })
+})

@@ -13,14 +13,21 @@ class Grid {
   nodes: Array<Node>;
 
   constructor(
-    { w=2, h=6, activeVertices=Set()} :
+    { w=3, h=7, activeVertices=Set()} :
     { w?:number, h?:number, activeVertices?:VertexSet } = { }
   ) {
-    this.xPoints = w + 1;
-    this.yPoints = h + 1;
+    this.xPoints = w;
+    this.yPoints = h;
     this.nodes = this.nodeArray(this.xPoints, this.yPoints);
     this.gridVertices = this.vertexArray(this.nodes);
     this.activeVertices = activeVertices;
+  }
+
+  toggleVertex(vertex:Vertex) {
+    const activeVertices = this.activeVertices.has(vertex) ?
+      this.activeVertices.delete(vertex) :
+      this.activeVertices.add(vertex);
+    return new Grid({w: this.xPoints, h: this.yPoints, activeVertices })
   }
 
   nodeArray(xPoints:number, yPoints:number):Array<Node> {

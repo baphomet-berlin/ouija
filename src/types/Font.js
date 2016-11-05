@@ -18,8 +18,13 @@ class Font {
     this.glyphs = glyphs;
   }
 
-  set(letter:string, grid:string) {
-    return this.glyphs.set(letter, grid);
+  set(letter:string, grid:Grid) {
+    return new Font(this.glyphs.set(letter, grid));
+  }
+
+  toggleVertex(letter:string, vertex:Set<Set<number>>) {
+    const letterGrid = this.glyphs.get(letter);
+    this.set(letter, letterGrid.toggleVertex(vertex));
   }
 
   get(letter:string) {
