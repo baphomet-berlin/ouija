@@ -16,7 +16,7 @@ export default function FontGrid ({letter, grid}) {
         key={it.toString()}
         coords={paddedCoords(it)} />
     )}
-    {grid.vertices.map(([p1, p2, active]) =>
+    {grid.vertices.toSeq().map((active, [p1, p2]) =>
       <FontLine
         key={p1.toString() + p2.toString()}
         points={[p1, p2]}
