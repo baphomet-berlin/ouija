@@ -13,9 +13,9 @@ class Grid {
   nodes: Array<Node>;
 
   constructor(
-    { activeVertices=Set(), w=2, h=6 }:
-    { activeVertices:VertexSet, w:number, h:number } = {})
-  {
+    { w=2, h=6, activeVertices=Set()} :
+    { w?:number, h?:number, activeVertices?:VertexSet } = { }
+  ) {
     this.xPoints = w + 1;
     this.yPoints = h + 1;
     this.nodes = this.nodeArray(this.xPoints, this.yPoints);
