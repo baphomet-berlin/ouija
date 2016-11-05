@@ -9,7 +9,7 @@ export default function LetterBox ({letter, grid}) {
   return (
     <div className="LetterBox">
       <FontGrid grid={grid}/>
-      {letter}
+      <div>{letter}</div>
     </div>
   )
 }
