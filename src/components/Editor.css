@@ -1,0 +1,7 @@
+.SaveButton {
+  float: right;
+}
+
+.SaveButton:after {
+  content: "\1F4BE";
+}
