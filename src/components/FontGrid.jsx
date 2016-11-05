@@ -4,8 +4,8 @@ import FontLine from './FontLine';
 
 import './FontGrid.css';
 
-const padding = 5;
-const unit = 20;
+const padding = 27;
+const unit = 35;
 const paddedCoords = (point) =>
   [point.first() * unit + padding, point.last() * unit + padding]
 
