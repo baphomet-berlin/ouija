@@ -1,6 +1,13 @@
 .FontLine {
   stroke: gray;
-  &.active {
-    stroke: red;
-  }
+  stroke-width: 4;
+  cursor: pointer;
+}
+
+.FontLine:hover {
+  stroke: orange;
+}
+
+.FontLine.active {
+  stroke: red;
 }

@@ -1,13 +1,13 @@
 //@flow
-import { Range, List } from 'immutable';
+import { Range, List, OrderedSet, Map } from 'immutable';
 import R from 'ramda';
 type Node = List<number>;
-type Vertex = [Node, Node, boolean];
+type Vertex = [OrderedSet<Node>, boolean];
 
 class Grid {
   xPoints: number;
   yPoints: number;
-  vertices: Array<Vertex>;
+  vertices: Map<Vertex, boolean>;
   nodes: Array<Node>;
 
   constructor(w:number, h:number) {
@@ -26,12 +26,13 @@ class Grid {
 
   vertexArray(nodes:Array<Node>) {
     const successors = [[1, -1], [0, 1], [1, 0], [1, 1]];
-    return R.unnest(this.nodes.map(node =>
+
+    return Map(R.unnest(this.nodes.map(node =>
       successors
         .map(([x, y]) => [x + node.first(), y + node.last()])
         .filter(it => this.isValidNode(it))
-        .map(([x, y]) => [node, List.of(x, y), false])
-    ))
+        .map(([x, y]) => [OrderedSet.of(node, List.of(x, y)), false])
+    )))
   }
 
   isValidNode([x, y]:Array<number>):boolean {

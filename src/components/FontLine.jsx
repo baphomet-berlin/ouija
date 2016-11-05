@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+
 import './FontLine.css';
 
 class FontLine extends Component {
   render() {
-    const { coords, active } = this.props;
+    const { coords, active, onClick } = this.props;
     const [[ x1, y1 ], [ x2, y2 ]] = coords;
     return (
       <line {...{x1, y1, x2, y2}}
-        strokeWidth="1" 
+        fill="transparent"
         className={`FontLine ${active ? 'active' : ''}`}
+        onClick={onClick}
       />
     );
   }
@@ -18,7 +20,7 @@ FontLine.propTypes = {
   coords: React.PropTypes.arrayOf(
     React.PropTypes.arrayOf(
       React.PropTypes.number
-    )       
+    )
   ),
   active: React.PropTypes.bool,
 }
