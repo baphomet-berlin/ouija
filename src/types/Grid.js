@@ -1,8 +1,8 @@
 //@flow
-import { Range, List, OrderedSet, Map } from 'immutable';
+import { Range, List, Set, Map } from 'immutable';
 import R from 'ramda';
 type Node = List<number>;
-type Vertex = [OrderedSet<Node>, boolean];
+type Vertex = [Set<Node>, boolean];
 
 class Grid {
   xPoints: number;
@@ -31,7 +31,7 @@ class Grid {
       successors
         .map(([x, y]) => [x + node.first(), y + node.last()])
         .filter(it => this.isValidNode(it))
-        .map(([x, y]) => [OrderedSet.of(node, List.of(x, y)), false])
+        .map(([x, y]) => [Set.of(node, List.of(x, y)), false])
     )))
   }
 
