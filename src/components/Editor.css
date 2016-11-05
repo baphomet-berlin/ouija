@@ -1,5 +1,7 @@
 .SaveButton {
   float: right;
+  margin-right: -15px;
+  cursor: pointer;
 }
 
 .SaveButton:after {
