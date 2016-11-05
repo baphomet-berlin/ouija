@@ -19,11 +19,11 @@ class Font {
   }
 
   set(letter:string, grid:string) {
-    this.glyphs.set(letter, grid);
+    return this.glyphs.set(letter, grid);
   }
 
   get(letter:string) {
-    this.glyphs.get(letter);
+    return this.glyphs.get(letter);
   }
 }
 
