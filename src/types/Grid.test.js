@@ -16,9 +16,9 @@ describe('#constructor', () =>{
     expect(gridFont.nodes.length).toBe(3 * 7);
   });
 
-  it('sets vertices', () => {
-    expect(oneByOne.vertices.size).toBe(6);
-    expect(twoByTwo.vertices.size).toBe(20);
-    expect(gridFont.vertices.size).toBe(56);
+  it('sets gridVertices', () => {
+    expect(oneByOne.gridVertices.size).toBe(6);
+    expect(twoByTwo.gridVertices.size).toBe(20);
+    expect(gridFont.gridVertices.size).toBe(56);
   });
 });
