@@ -1,7 +1,6 @@
 import React from 'react';
 import FontPoint from './FontPoint'
 import FontLine from './FontLine';
-import { Set } from 'immutable';
 
 import './FontGrid.css';
 
@@ -12,22 +11,30 @@ const paddedCoords = (point) =>
 
 class FontGrid extends React.Component{
 
+  state = {
+    nodes: this.props.grid.nodes,
+    vertices: this.props.grid.vertices,
+  }
+
+  toggleVertex(points) {
+    const vertices = this.state.vertices.update(points, it => !it)
+    this.setState({vertices})
+  }
 
   render() {
-    const { nodes, vertices } = this.props.grid;
-
+    const { nodes, vertices } = this.state;
     return (<svg className="FontGrid">
       {nodes.map(it =>
         <FontPoint
           key={it.toString()}
           coords={paddedCoords(it)} />
       )}
-      {vertices.toSeq().map((active, [p1, p2]) =>
+      {vertices.entrySeq().toArray().map(([points, active]) =>
         <FontLine
-          key={p1.toString() + p2.toString()}
-          coords={[paddedCoords(p1), paddedCoords(p2)]}
+          key={points.toString()}
+          coords={[paddedCoords(points.first()), paddedCoords(points.last())]}
           active={active}
-          onClick={() => console.log(Set(p1, p2))}
+          onClick={() => this.toggleVertex(points)}
         />
       )}
     </svg>)

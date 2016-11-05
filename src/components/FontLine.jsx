@@ -6,10 +6,10 @@ class FontLine extends Component {
   render() {
     const { coords, active, onClick } = this.props;
     const [[ x1, y1 ], [ x2, y2 ]] = coords;
+    console.log(active)
     return (
       <line {...{x1, y1, x2, y2}}
         fill="transparent" 
-        strokeWidth="1" 
         className={`FontLine ${active ? 'active' : ''}`}
         onClick={onClick}
       />
