@@ -23,6 +23,14 @@ class Grid {
     this.activeVertices = activeVertices;
   }
 
+  toJS() {
+    return {
+      w: this.xPoints,
+      h: this.yPoints,
+      activeVertices: this.activeVertices.toJS(),
+    }
+  }
+
   toggleVertex(vertex:Vertex) {
     const activeVertices = this.activeVertices.has(vertex) ?
       this.activeVertices.delete(vertex) :
