@@ -3,20 +3,31 @@ import { Range, List, Set, Map } from 'immutable';
 import R from 'ramda';
 type Node = List<number>;
 type Vertex = Set<Node>;
+type VertexSet = Set<Vertex>;
 
 class Grid {
   xPoints: number;
   yPoints: number;
-  gridVertices: Set<Vertex>;
-  activeVertices: Set<Vertex>;
+  gridVertices: VertexSet;
+  activeVertices: VertexSet;
   nodes: Array<Node>;
 
-  constructor(w:number, h:number) {
-    this.xPoints = w + 1;
-    this.yPoints = h + 1;
+  constructor(
+    { w=3, h=7, activeVertices=Set()} :
+    { w?:number, h?:number, activeVertices?:VertexSet } = { }
+  ) {
+    this.xPoints = w;
+    this.yPoints = h;
     this.nodes = this.nodeArray(this.xPoints, this.yPoints);
     this.gridVertices = this.vertexArray(this.nodes);
-    this.activeVertices = Set();
+    this.activeVertices = activeVertices;
+  }
+
+  toggleVertex(vertex:Vertex) {
+    const activeVertices = this.activeVertices.has(vertex) ?
+      this.activeVertices.delete(vertex) :
+      this.activeVertices.add(vertex);
+    return new Grid({w: this.xPoints, h: this.yPoints, activeVertices })
   }
 
   nodeArray(xPoints:number, yPoints:number):Array<Node> {
