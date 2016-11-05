@@ -8,11 +8,18 @@ import Grid from '../types/Grid';
 import './Editor.css';
 
 class Editor extends Component {
+  onClickSaveButton(e) {
+    console.log(e);
+  }
+
   render() {
     const {letters} = this.props;
     return (
       <div className="Editor">
-        <span className="SaveButton"></span>
+        <span
+          className="SaveButton"
+          onClick={this.onClickSaveButton}>
+        </span>
         <div className="Alphabet">
           {letters.split('').map(letter => (
             <LetterBox
