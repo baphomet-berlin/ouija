@@ -1,8 +1,6 @@
 //@flow
 import Grid from './Grid';
 import { Map, List, Set } from 'immutable';
-import R from 'ramda';
-
 
 type GlyphMap = Map<string, Grid>;
 

@@ -3,9 +3,10 @@
 import React, {Component} from 'react';
 
 import LetterBox from './LetterBox';
-import Grid from '../types/Grid';
+import Font from '../types/Font';
 
 import './Editor.css';
+
 
 class Editor extends Component {
   onClickSaveButton(e) {
@@ -14,6 +15,8 @@ class Editor extends Component {
 
   render() {
     const {letters} = this.props;
+    const alphabet = Font.fromAlphabet(letters.split('')).glyphs.toObject();
+
     return (
       <div className="Editor">
         <span
@@ -21,12 +24,14 @@ class Editor extends Component {
           onClick={this.onClickSaveButton}>
         </span>
         <div className="Alphabet">
-          {letters.split('').map(letter => (
-            <LetterBox
-              key={letter}
-              letter={letter}
-              grid={new Grid(2, 6)} />
-          ))}
+          {
+            Object.keys(alphabet).map(letter => (
+              <LetterBox
+                key={letter}
+                letter={letter}
+                grid={alphabet[letter]} />
+            ))
+          }
         </div>
       </div>
     )
