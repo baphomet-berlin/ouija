@@ -17,6 +17,10 @@ class Editor extends Component {
     console.log(e);
   }
 
+  toggleVertexFor(vertex, letter) {
+    this.setState({font: this.state.font.toggleVertex(letter, vertex)});
+  }
+
   render() {
     const { font } = this.state;
     const glyphsObject = font.glyphs.toObject();
@@ -34,6 +38,7 @@ class Editor extends Component {
                 key={letter}
                 letter={letter}
                 grid={glyphsObject[letter]}
+                onEdgeClick={(vertex, letter) => this.toggleVertexFor(vertex, letter)}
               />
             ))
           }
