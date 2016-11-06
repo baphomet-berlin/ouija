@@ -14,6 +14,13 @@ class Font {
     return new Font(glyphs);
   }
 
+  static fromJS({alphabet, grids}) {
+    const glyphs = Map(alphabet.map((it, i) =>
+      [it, Grid.fromGridFontJS(grids[i])]
+    ));
+    return new Font(glyphs)
+  }
+
   constructor(glyphs:GlyphMap) {
     this.glyphs = glyphs;
   }
@@ -33,10 +40,10 @@ class Font {
 
   toJS() {
     const glyphsObject = this.glyphs.toObject();
-    const letters = Object.keys(glyphsObject);
+    const alphabet = Object.keys(glyphsObject);
     return {
-      letters,
-      grids: letters.map(it => this.get(it).toGridFontJS()),
+      alphabet,
+      grids: alphabet.map(it => this.get(it).toGridFontJS()),
     }
   }
 }

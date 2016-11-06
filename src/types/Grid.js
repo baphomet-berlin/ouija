@@ -27,6 +27,13 @@ class Grid {
     return this.activeVertices.toJS();
   }
 
+  static fromGridFontJS(verticesArray) {
+    const vertices = Set(verticesArray.map(vertex =>
+      Set(vertex.map(List))
+    ));
+    return new Grid({ activeVertices: vertices });
+  }
+
   toggleVertex(vertex:Vertex) {
     const activeVertices = this.activeVertices.has(vertex) ?
       this.activeVertices.delete(vertex) :

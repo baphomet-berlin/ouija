@@ -44,24 +44,29 @@ describe('#toggleVertex', () => {
 });
 
 
-describe('#toJS', () => {
+describe('#toJS / #fromJs', () => {
   const myFont = new Font(glyphs)
   const emptyGrids = Array.from(new Array(26), () => []);
   const miniJS = {
-    letters: alphabet,
+    alphabet: alphabet,
     grids: emptyGrids,
   }
   const toggled = myFont.toggleVertex('a', Set.of(List.of(0, 1), List.of(0, 0)));
   const toggledGrids = [[[[0, 1], [0, 0]]]].concat(emptyGrids.slice(1))
   const toggledJS = {
-    letters: alphabet,
+    alphabet: alphabet,
     grids: toggledGrids,
   }
   it('serializes an empty font', () => {
     expect(myFont.toJS()).toEqual(miniJS);
   });
   it('serializes an edited font', () => {
-    const myFont = new Font(glyphs)
     expect(toggled.toJS()).toEqual(toggledJS);
+  });
+  it('deserializes an empty font', () => {
+    expect(Font.fromJS(miniJS)).toEqual(myFont);
+  });
+  it('deserializes an edited font', () => {
+    expect(Font.fromJS(toggledJS)).toEqual(toggled);
   });
 });
