@@ -9,13 +9,17 @@ import './Editor.css';
 
 
 class Editor extends Component {
+  state = {
+    font: this.props.font,
+  }
+
   onClickSaveButton(e) {
     console.log(e);
   }
 
   render() {
-    const {letters} = this.props;
-    const alphabet = Font.fromAlphabet(letters.split('')).glyphs.toObject();
+    const { font } = this.state;
+    const glyphsObject = font.glyphs.toObject();
 
     return (
       <div className="Editor">
@@ -25,11 +29,12 @@ class Editor extends Component {
         </span>
         <div className="Alphabet">
           {
-            Object.keys(alphabet).map(letter => (
+            Object.keys(glyphsObject).map(letter => (
               <LetterBox
                 key={letter}
                 letter={letter}
-                grid={alphabet[letter]} />
+                grid={glyphsObject[letter]}
+              />
             ))
           }
         </div>
@@ -39,7 +44,7 @@ class Editor extends Component {
 }
 
 Editor.defaultProps = {
-  letters: 'abcdefghijklmnopqrstuvwxyz'
+  font: Font.fromAlphabet('abcdefghijklmnopqrstuvwxyz'.split('')),
 }
 
 export default Editor;

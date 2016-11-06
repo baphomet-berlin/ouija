@@ -51,11 +51,5 @@ class FontGrid extends React.Component{
     )
   }
 }
-FontGrid.propTypes = {
-  lines: React.PropTypes.arrayOf(
-    React.PropTypes.arrayOf(
-      React.PropTypes.arrayOf(
-        React.PropTypes.number))),
-}
 
 export default FontGrid;
