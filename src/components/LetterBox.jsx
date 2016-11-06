@@ -5,10 +5,10 @@ import FontGrid from './FontGrid';
 import './LetterBox.css';
 import Grid from '../types/Grid';
 
-export default function LetterBox ({letter, grid}) {
+export default function LetterBox ({letter, grid, onEdgeClick}) {
   return (
     <div className="LetterBox">
-      <FontGrid grid={grid}/>
+      <FontGrid grid={grid} letter={letter} onEdgeClick={onEdgeClick} />
       <div>{letter}</div>
     </div>
   )

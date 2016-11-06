@@ -1,0 +1,9 @@
+.SaveButton {
+  float: right;
+  margin-right: -15px;
+  cursor: pointer;
+}
+
+.SaveButton:after {
+  content: "\1F4BE";
+}

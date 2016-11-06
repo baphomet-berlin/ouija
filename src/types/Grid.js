@@ -1,5 +1,5 @@
 //@flow
-import { Range, List, Set, Map } from 'immutable';
+import { Range, List, Set} from 'immutable';
 import R from 'ramda';
 type Node = List<number>;
 type Vertex = Set<Node>;
@@ -42,7 +42,7 @@ class Grid {
   }
 
   nodeArray(xPoints:number, yPoints:number):Array<Node> {
-    return Range(0, xPoints).flatMap(col => 
+    return Range(0, xPoints).flatMap(col =>
       Range(0, yPoints).map(row =>
         List.of(col, row)
     )).toArray();
