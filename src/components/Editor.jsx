@@ -13,8 +13,12 @@ class Editor extends Component {
     font: this.props.font,
   }
 
-  onClickSaveButton(e) {
-    console.log(e);
+  saveFont(name, font) {
+    window.localStorage.setItem(name, JSON.stringify(font))
+  }
+
+  loadFont(name) {
+    this.setState({ font: Font.fromJS(JSON.parse(window.localStorage.getItem(name)))})
   }
 
   toggleVertexFor(vertex, letter) {
@@ -29,7 +33,12 @@ class Editor extends Component {
       <div className="Editor">
         <span
           className="SaveButton"
-          onClick={this.onClickSaveButton}>
+          onClick={() => this.saveFont('myfont', font.toJS())}>
+        </span>
+        <span
+          className="LoadButton"
+          onClick={() => this.loadFont('myfont')}>
+          load
         </span>
         <div className="Alphabet">
           {
