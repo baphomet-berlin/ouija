@@ -13,8 +13,8 @@ class Editor extends Component {
     font: this.props.font,
   }
 
-  saveFont(name, font) {
-    window.localStorage.setItem(name, JSON.stringify(font))
+  saveFont(font) {
+    window.localStorage.setItem(font.hashCode(), JSON.stringify(font))
   }
 
   loadFont(name) {
@@ -33,7 +33,7 @@ class Editor extends Component {
       <div className="Editor">
         <span
           className="SaveButton"
-          onClick={() => this.saveFont('myfont', font.toJS())}>
+          onClick={() => this.saveFont(font.toJS())}>
         </span>
         <span
           className="LoadButton"

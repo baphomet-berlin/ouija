@@ -44,6 +44,14 @@ class Font {
       grids: alphabet.map(it => this.get(it).toGridFontJS()),
     }
   }
+
+  toJSON() {
+    return JSON.stringify(this.toJS());
+  }
+
+  hashCode() {
+    return this.glyphs.hashCode();
+  }
 }
 
 export default Font;

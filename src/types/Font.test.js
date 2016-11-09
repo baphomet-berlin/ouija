@@ -6,6 +6,11 @@ const miniGrid = new Grid({activeVertices: new Set()});
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 const glyphs = Map(alphabet.map(el => [el, (new Grid())]));
 const miniGlyphs = Map([['a', miniGrid]]);
+const emptyGrids = Array.from(new Array(26), () => []);
+const miniJS = {
+  alphabet: alphabet,
+  grids: emptyGrids,
+}
 
 describe('::fromAlphabet()', () =>{
   const myFont = Font.fromAlphabet(alphabet);
@@ -46,11 +51,6 @@ describe('#toggleVertex', () => {
 
 describe('#toJS / #fromJs', () => {
   const myFont = new Font(glyphs)
-  const emptyGrids = Array.from(new Array(26), () => []);
-  const miniJS = {
-    alphabet: alphabet,
-    grids: emptyGrids,
-  }
   const toggled = myFont.toggleVertex('a', Set.of(List.of(0, 1), List.of(0, 0)));
   const toggledGrids = [[[[0, 1], [0, 0]]]].concat(emptyGrids.slice(1))
   const toggledJS = {
@@ -68,5 +68,12 @@ describe('#toJS / #fromJs', () => {
   });
   it('deserializes an edited font', () => {
     expect(Font.fromJS(toggledJS)).toEqual(toggled);
+  });
+});
+
+describe('#toJSON', () => {
+  it('serializes and stringifies a font', () =>{
+    const myFont = new Font(glyphs)
+    expect(myFont.toJSON()).toEqual(JSON.stringify(miniJS));
   });
 });
