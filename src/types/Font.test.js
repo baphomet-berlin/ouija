@@ -10,6 +10,7 @@ const emptyGrids = Array.from(new Array(26), () => []);
 const miniJS = {
   alphabet: alphabet,
   grids: emptyGrids,
+  name: 'myName',
 }
 
 describe('::fromAlphabet()', () =>{
@@ -56,24 +57,33 @@ describe('#toJS / #fromJs', () => {
   const toggledJS = {
     alphabet: alphabet,
     grids: toggledGrids,
+    name: 'myName',
   }
+  it('throws error on attempt to serialize a nameless font', () => {
+    expect(() => myFont.toJS()).toThrow();
+  });
   it('serializes an empty font', () => {
+    myFont.name = 'myName';
     expect(myFont.toJS()).toEqual(miniJS);
   });
   it('serializes an edited font', () => {
+    toggled.name = 'myName';
     expect(toggled.toJS()).toEqual(toggledJS);
   });
   it('deserializes an empty font', () => {
-    expect(Font.fromJS(miniJS)).toEqual(myFont);
+    const font = Font.fromJS(miniJS);
+    expect(font).toEqual(myFont);
   });
   it('deserializes an edited font', () => {
-    expect(Font.fromJS(toggledJS)).toEqual(toggled);
+    const font = Font.fromJS(toggledJS);
+    expect(font).toEqual(toggled);
   });
 });
 
 describe('#toJSON', () => {
   it('serializes and stringifies a font', () =>{
     const myFont = new Font(glyphs)
+    myFont.name = 'myName';
     expect(myFont.toJSON()).toEqual(JSON.stringify(miniJS));
   });
 });
