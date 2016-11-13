@@ -6,6 +6,12 @@ const miniGrid = new Grid({activeVertices: new Set()});
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 const glyphs = Map(alphabet.map(el => [el, (new Grid())]));
 const miniGlyphs = Map([['a', miniGrid]]);
+const emptyGrids = Array.from(new Array(26), () => []);
+const miniJS = {
+  alphabet: alphabet,
+  grids: emptyGrids,
+  name: 'myName',
+}
 
 describe('::fromAlphabet()', () =>{
   const myFont = Font.fromAlphabet(alphabet);
@@ -46,27 +52,38 @@ describe('#toggleVertex', () => {
 
 describe('#toJS / #fromJs', () => {
   const myFont = new Font(glyphs)
-  const emptyGrids = Array.from(new Array(26), () => []);
-  const miniJS = {
-    alphabet: alphabet,
-    grids: emptyGrids,
-  }
   const toggled = myFont.toggleVertex('a', Set.of(List.of(0, 1), List.of(0, 0)));
   const toggledGrids = [[[[0, 1], [0, 0]]]].concat(emptyGrids.slice(1))
   const toggledJS = {
     alphabet: alphabet,
     grids: toggledGrids,
+    name: 'myName',
   }
+  it('throws error on attempt to serialize a nameless font', () => {
+    expect(() => myFont.toJS()).toThrow();
+  });
   it('serializes an empty font', () => {
+    myFont.name = 'myName';
     expect(myFont.toJS()).toEqual(miniJS);
   });
   it('serializes an edited font', () => {
+    toggled.name = 'myName';
     expect(toggled.toJS()).toEqual(toggledJS);
   });
   it('deserializes an empty font', () => {
-    expect(Font.fromJS(miniJS)).toEqual(myFont);
+    const font = Font.fromJS(miniJS);
+    expect(font).toEqual(myFont);
   });
   it('deserializes an edited font', () => {
-    expect(Font.fromJS(toggledJS)).toEqual(toggled);
+    const font = Font.fromJS(toggledJS);
+    expect(font).toEqual(toggled);
+  });
+});
+
+describe('#toJSON', () => {
+  it('serializes and stringifies a font', () =>{
+    const myFont = new Font(glyphs)
+    myFont.name = 'myName';
+    expect(myFont.toJSON()).toEqual(JSON.stringify(miniJS));
   });
 });
