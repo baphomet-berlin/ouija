@@ -33,19 +33,26 @@ class Editor extends Component {
 
     return (
       <div className="Editor">
-        <form
-          className="SaveSection"
-          onSubmit={(e) => this.saveFont(e)}>
-          <input
-            className="SaveInput"
-            name="fontName"
-            placeholder="Name your font" />
-          <button
-            className="SaveButton"
-            type="submit">
-            Save
-          </button>
-        </form>
+        <div className="Menu">
+          <span className="FontList">
+            <span>gggg</span>
+            <span>font 2</span>
+            <span>font 3</span>
+          </span>
+          <form
+            className="SaveSection"
+            onSubmit={(e) => this.saveFont(e)}>
+            <input
+              className="SaveInput"
+              name="fontName"
+              placeholder="Name your font" />
+            <button
+              className="SaveButton"
+              type="submit">
+              Save
+            </button>
+          </form>
+        </div>
         <div className="Alphabet">
           {
             Object.keys(glyphsObject).map(letter => (

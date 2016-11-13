@@ -1,3 +1,18 @@
+.Menu {
+  max-width: 530px;
+  height: 25px;
+  margin: auto;
+}
+
+.FontList {
+  float: left;
+  margin-top: 3px;
+}
+
+.FontList > span {
+  margin-right: 10px;
+}
+
 .SaveSection {
   margin-left: 54%;
 }
