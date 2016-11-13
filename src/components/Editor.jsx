@@ -10,7 +10,7 @@ import './Editor.css';
 
 class Editor extends Component {
   state = {
-    chars: this.props.chars,
+    font: this.props.font,
     fonts: []
   }
 
@@ -23,7 +23,7 @@ class Editor extends Component {
   saveFont(e) {
     e.preventDefault();
     const fontName = e.target.elements.fontName.value || 'myFont';
-    window.localStorage.setItem(fontName, JSON.stringify(this.state.font))
+    window.localStorage.setItem(fontName, JSON.stringify(this.state.font.toJS()))
     this.setState({
       fonts: [
         ...this.state.fonts,
@@ -32,28 +32,39 @@ class Editor extends Component {
     })
   }
 
+  onFontClick(name) {
+    this.loadFont(name);
+  }
+
   loadFont(name) {
     this.setState({
-      chars: Font.fromJS(JSON.parse(window.localStorage.getItem(name)))
+      font: Font.fromJS(JSON.parse(window.localStorage.getItem(name)))
     })
   }
 
   toggleVertexFor(vertex, letter) {
     this.setState({
-      chars: this.state.font.toggleVertex(letter, vertex)
+      font: this.state.font.toggleVertex(letter, vertex)
     });
   }
 
   render() {
-    const { chars, fonts } = this.state;
-    const glyphsObject = chars.glyphs.toObject();
+    const { font, fonts } = this.state;
+    const glyphsObject = font.glyphs.toObject();
 
     return (
       <div className="Editor">
         <div className="Menu">
           <span className="FontList">
             {
-              fonts.map(font => <span key={font}>{font}</span>)
+              fonts.sort().map(font =>
+                <span
+                  className="Font"
+                  onClick={() => this.onFontClick(font)}
+                  key={font}>
+                  {font}
+                </span>
+              )
             }
           </span>
           <form
@@ -88,7 +99,7 @@ class Editor extends Component {
 }
 
 Editor.defaultProps = {
-  chars: Font.fromAlphabet('abcdefghijklmnopqrstuvwxyz'.split(''))
+  font: Font.fromAlphabet('abcdefghijklmnopqrstuvwxyz'.split(''))
 }
 
 export default Editor;
