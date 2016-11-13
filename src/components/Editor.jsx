@@ -13,8 +13,10 @@ class Editor extends Component {
     font: this.props.font,
   }
 
-  saveFont(name, font) {
-    window.localStorage.setItem(name, JSON.stringify(font))
+  saveFont(e) {
+    e.preventDefault();
+    const fontName = e.target.elements.fontName.value || 'myFont';
+    window.localStorage.setItem(fontName, JSON.stringify(this.state.font))
   }
 
   loadFont(name) {
@@ -31,15 +33,19 @@ class Editor extends Component {
 
     return (
       <div className="Editor">
-        <span
-          className="SaveButton"
-          onClick={() => this.saveFont('myfont', font.toJS())}>
-        </span>
-        <span
-          className="LoadButton"
-          onClick={() => this.loadFont('myfont')}>
-          load
-        </span>
+        <form
+          className="SaveSection"
+          onSubmit={(e) => this.saveFont(e)}>
+          <input
+            className="SaveInput"
+            name="fontName"
+            placeholder="Name your font" />
+          <button
+            className="SaveButton"
+            type="submit">
+            Save
+          </button>
+        </form>
         <div className="Alphabet">
           {
             Object.keys(glyphsObject).map(letter => (

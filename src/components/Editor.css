@@ -1,9 +1,15 @@
-.SaveButton {
-  float: right;
-  margin-right: -15px;
-  cursor: pointer;
+.SaveSection {
+  margin-left: 54%;
 }
 
-.SaveButton:after {
-  content: "\1F4BE";
+.SaveInput {
+  margin-right: 8px;
+}
+
+.SaveInput:focus {
+  outline: 1px solid #D3D3D3;
+}
+
+.SaveButton {
+  cursor: pointer;
 }
