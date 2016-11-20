@@ -3,7 +3,6 @@ import Grid from './Grid';
 import { Map, List, Set } from 'immutable';
 
 type GlyphMap = Map<string, Grid>;
-const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
 class Font {
   glyphs: GlyphMap;

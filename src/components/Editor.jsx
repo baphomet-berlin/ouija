@@ -16,8 +16,8 @@ class Editor extends Component {
 
   componentWillMount() {
     const fonts = Object.keys(window.localStorage).reduce((acc, key) => {
-      const font = JSON.parse(window.localStorage[key])
-      acc[key] = new Font(font.alphabet, font.name);
+      const font = JSON.parse(window.localStorage[key]);
+      acc[key] = Font.fromJS(font);
       return acc;
     }, {})
 
@@ -26,15 +26,17 @@ class Editor extends Component {
 
   saveFont(e) {
     e.preventDefault();
-    const fontName = e.target.elements.fontName.value || this.state.font.name;
-    window.localStorage.setItem(this.state.font.hashCode(), JSON.stringify(this.state.font.toJS()))
+
+    const {font, fonts} = this.state;
+    const fontName = e.target.elements.fontName.value || font.hashCode();
+
     this.setState({
-      fonts: [
-        ...this.state.fonts,
-        fontName
-      ]
+      fonts: {
+        ...fonts,
+        [fontName]: new Font(font.glyphs, fontName)
+      }
     })
-    console.log(this.state.font);
+    window.localStorage.setItem(fontName, JSON.stringify(font.toJS()))
   }
 
   onFontClick(name) {
@@ -43,7 +45,7 @@ class Editor extends Component {
 
   loadFont(name) {
     this.setState({
-      font: Font.fromJS(JSON.parse(window.localStorage.getItem(name)))
+      font: this.state.fonts[name]
     })
   }
 
@@ -56,6 +58,7 @@ class Editor extends Component {
   render() {
     const { font, fonts } = this.state;
     const glyphsObject = font.glyphs.toObject();
+    console.log(this.state);
 
     return (
       <div className="Editor">
