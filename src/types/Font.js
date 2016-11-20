@@ -56,6 +56,7 @@ class Font {
   }
 
   hashCode() {
+    console.log(this.glyphs);
     return this.glyphs.hashCode();
   }
 }

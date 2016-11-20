@@ -58,7 +58,6 @@ class Editor extends Component {
   render() {
     const { font, fonts } = this.state;
     const glyphsObject = font.glyphs.toObject();
-    console.log(this.state);
 
     return (
       <div className="Editor">
