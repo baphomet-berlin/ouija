@@ -15,21 +15,26 @@ class Editor extends Component {
   }
 
   componentWillMount() {
-    this.setState({
-      fonts: Object.keys(window.localStorage)
-    });
+    const fonts = Object.keys(window.localStorage).reduce((acc, key) => {
+      const font = JSON.parse(window.localStorage[key])
+      acc[key] = new Font(font.alphabet, font.name);
+      return acc;
+    }, {})
+
+    this.setState({fonts});
   }
 
   saveFont(e) {
     e.preventDefault();
-    const fontName = e.target.elements.fontName.value || 'myFont';
-    window.localStorage.setItem(fontName, JSON.stringify(this.state.font.toJS()))
+    const fontName = e.target.elements.fontName.value || this.state.font.name;
+    window.localStorage.setItem(this.state.font.hashCode(), JSON.stringify(this.state.font.toJS()))
     this.setState({
       fonts: [
         ...this.state.fonts,
         fontName
       ]
     })
+    console.log(this.state.font);
   }
 
   onFontClick(name) {
@@ -57,7 +62,7 @@ class Editor extends Component {
         <div className="Menu">
           <span className="FontList">
             {
-              fonts.sort().map(font =>
+              Object.keys(fonts).sort().map(font =>
                 <span
                   className="Font"
                   onClick={() => this.onFontClick(font)}
@@ -99,7 +104,7 @@ class Editor extends Component {
 }
 
 Editor.defaultProps = {
-  font: Font.fromAlphabet('abcdefghijklmnopqrstuvwxyz'.split(''))
+  font: Font.fromAlphabet('abcdefghijklmnopqrstuvwxyz'.split(''), 'myFont')
 }
 
 export default Editor;

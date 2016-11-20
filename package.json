@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "immutability-helper": "^2.0.0",
     "immutable": "^3.8.1",
     "ramda": "^0.22.1",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-addons-css-transition-group": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-toolbox": "^1.2.5"
   },
   "scripts": {
     "start": "react-scripts start",
