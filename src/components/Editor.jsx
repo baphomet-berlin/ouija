@@ -11,35 +11,83 @@ import './Editor.css';
 class Editor extends Component {
   state = {
     font: this.props.font,
+    fonts: []
   }
 
-  saveFont(font) {
-    window.localStorage.setItem(font.hashCode(), JSON.stringify(font))
+  componentWillMount() {
+    const fonts = Object.keys(window.localStorage).reduce((acc, key) => {
+      const font = JSON.parse(window.localStorage[key]);
+      acc[key] = Font.fromJS(font);
+      return acc;
+    }, {})
+
+    this.setState({fonts});
+  }
+
+  saveFont(e) {
+    e.preventDefault();
+
+    const {font, fonts} = this.state;
+    const fontName = e.target.elements.fontName.value || font.hashCode();
+
+    this.setState({
+      fonts: {
+        ...fonts,
+        [fontName]: new Font(font.glyphs, fontName)
+      }
+    })
+    window.localStorage.setItem(fontName, JSON.stringify(font.toJS()))
+  }
+
+  onFontClick(name) {
+    this.loadFont(name);
   }
 
   loadFont(name) {
-    this.setState({ font: Font.fromJS(JSON.parse(window.localStorage.getItem(name)))})
+    this.setState({
+      font: this.state.fonts[name]
+    })
   }
 
   toggleVertexFor(vertex, letter) {
-    this.setState({font: this.state.font.toggleVertex(letter, vertex)});
+    this.setState({
+      font: this.state.font.toggleVertex(letter, vertex)
+    });
   }
 
   render() {
-    const { font } = this.state;
+    const { font, fonts } = this.state;
     const glyphsObject = font.glyphs.toObject();
 
     return (
       <div className="Editor">
-        <span
-          className="SaveButton"
-          onClick={() => this.saveFont(font.toJS())}>
-        </span>
-        <span
-          className="LoadButton"
-          onClick={() => this.loadFont('myfont')}>
-          load
-        </span>
+        <div className="Menu">
+          <span className="FontList">
+            {
+              Object.keys(fonts).sort().map(font =>
+                <span
+                  className="Font"
+                  onClick={() => this.onFontClick(font)}
+                  key={font}>
+                  {font}
+                </span>
+              )
+            }
+          </span>
+          <form
+            className="SaveSection"
+            onSubmit={(e) => this.saveFont(e)}>
+            <input
+              className="SaveInput"
+              name="fontName"
+              placeholder="Name your font" />
+            <button
+              className="SaveButton"
+              type="submit">
+              Save
+            </button>
+          </form>
+        </div>
         <div className="Alphabet">
           {
             Object.keys(glyphsObject).map(letter => (
@@ -58,7 +106,7 @@ class Editor extends Component {
 }
 
 Editor.defaultProps = {
-  font: Font.fromAlphabet('abcdefghijklmnopqrstuvwxyz'.split('')),
+  font: Font.fromAlphabet('abcdefghijklmnopqrstuvwxyz'.split(''), 'myFont')
 }
 
 export default Editor;

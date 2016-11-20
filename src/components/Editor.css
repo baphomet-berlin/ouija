@@ -1,9 +1,34 @@
-.SaveButton {
-  float: right;
-  margin-right: -15px;
+.Menu {
+  max-width: 530px;
+  height: 25px;
+  margin: auto;
+}
+
+.FontList {
+  float: left;
+  margin-top: 3px;
+}
+
+.FontList > span {
+  margin-right: 10px;
+}
+
+.Font {
   cursor: pointer;
 }
 
-.SaveButton:after {
-  content: "\1F4BE";
+.SaveSection {
+  margin-left: 66%;
+}
+
+.SaveInput {
+  margin-right: 8px;
+}
+
+.SaveInput:focus {
+  outline: 1px solid #D3D3D3;
+}
+
+.SaveButton {
+  cursor: pointer;
 }
